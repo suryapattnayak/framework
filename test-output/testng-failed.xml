@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [MySuite]">
+  <test thread-count="5" name="TmpTest(failed)">
+    <parameter name="browserName" value="chrome"/>
+    <parameter name="Url" value="https://www.amazon.in/"/>
+    <classes>
+      <class name="com.Amazon.Test.testcase1">
+        <methods>
+          <include name="test"/>
+          <include name="afterTest"/>
+          <include name="openBrowser"/>
+        </methods>
+      </class> <!-- com.Amazon.Test.testcase1 -->
+    </classes>
+  </test> <!-- TmpTest(failed) -->
+</suite> <!-- Failed suite [MySuite] -->
