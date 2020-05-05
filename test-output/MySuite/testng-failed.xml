@@ -3,13 +3,14 @@
 <suite name="Failed suite [MySuite]">
   <test thread-count="5" name="TmpTest(failed)">
     <parameter name="browserName" value="chrome"/>
-    <parameter name="Url" value="https://www.amazon.in/"/>
+    <parameter name="word" value="tv"/>
+    <parameter name="Url" value="https://www.flipkart.com/"/>
     <classes>
       <class name="com.Amazon.Test.testcase1">
         <methods>
-          <include name="test"/>
           <include name="afterTest"/>
           <include name="openBrowser"/>
+          <include name="Ftest" invocation-numbers="0"/>
         </methods>
       </class> <!-- com.Amazon.Test.testcase1 -->
     </classes>

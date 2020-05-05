@@ -2,10 +2,13 @@ package com.Amazon.Test;
 
 import org.testng.annotations.Test;
 
-import com.Amazon.ExcelReader.Exelreader;
-
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,10 +17,10 @@ import org.testng.annotations.AfterTest;
 public class testcase1 {
 
 	private  WebDriver driver = null;
-	private String browserName = null;
 	private String projectPath = null;
-	String word=null;
 
+	Properties prop=new Properties();
+	
 	@BeforeTest
 	@Parameters({"browserName","Url"})
 	public void openBrowser(String browserName,String urL) throws InterruptedException {  
@@ -30,16 +33,26 @@ public class testcase1 {
 	}
 	
 	@Test
-	public void test() throws InterruptedException {
-		System.out.println("hii");
-		word=Exelreader.wordRead("Sheet1", "Word", 2);
-		//System.out.println("word"+word);
-		driver.findElement(By.xpath("//input[@type='text'][@name='field-keywords']")).sendKeys(word);
+	@Parameters({"word"})
+	public void Atest(String word) throws InterruptedException, IOException {
+		FileInputStream propfile = new FileInputStream(System.getProperty("user.dir")+"/resources/application.properties");
+		prop.load(propfile);
+		driver.findElement(By.xpath(prop.getProperty("Amazon_Searchbar"))).sendKeys(word);
 		//Thread.sleep(4000);
-		driver.findElement(By.xpath("//input[@type='submit'][@value='Go']")).click();
+		driver.findElement(By.xpath(prop.getProperty("Amazon_Searchbar_click"))).click();
 		Thread.sleep(4000);
 	}
 	
+	@Test
+	@Parameters({"word"})
+	public void Ftest(String word) throws InterruptedException, IOException {
+		FileInputStream propfile = new FileInputStream(System.getProperty("user.dir")+"/resources/application.properties");
+		prop.load(propfile);
+		driver.findElement(By.xpath(prop.getProperty("Flipkart_Searchbar"))).sendKeys(word);
+		//Thread.sleep(4000);
+		driver.findElement(By.xpath(prop.getProperty("Flipkart_Searchbar_click"))).click();
+		Thread.sleep(4000);
+	}
 	
 
 	@AfterTest
@@ -48,5 +61,9 @@ public class testcase1 {
 		driver.close();
 		driver.quit();
 	}
-
+	@Test
+	public void see()
+	{
+		System.out.println("working");
+	}
 }
